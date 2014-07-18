@@ -1,6 +1,6 @@
 # Weibo App
 
-This app is a customized Weibo API client, it already implemented Since Weibo API and Tencent Weibo API.
+This app is a customized Weibo API client, it already implemented Sina Weibo API and Tencent Weibo API.
 Read the [article](http://logan676.diandian.com/post/2013-01-31/40049163912) to know more about the app.
 
 ## Develop in Eclipse
