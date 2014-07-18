@@ -7,14 +7,14 @@ Read the [article](http://logan676.diandian.com/post/2013-01-31/40049163912) to 
 
 ### Android Dependencies
 
-* [Sina Android_SDK](https://github.com/sinaweibosdk/weibo_android_sdk)
-* [Tencent com_weibo_android_sdk](https://github.com/wbopenplatform/Android_SDK)
+* [Sina Android_SDK](https://github.com/Logan676/Sina_Android_SDK_V1.5)
+* [Tencent com_weibo_android_sdk](https://github.com/Logan676/Tencent_Android_SDK_v1.2.1)
 * [GreenDroid](https://github.com/cyrilmottier/GreenDroid)
 * [Android-Universal-Image-Loader](https://github.com/nostra13/Android-Universal-Image-Loader)
 
 ### Build
-- Download `Android_SDK` from http://open.weibo.com/wiki/SDK#Android_SDK
-- Download `com_weibo_android_sdk` from http://wiki.open.t.qq.com/index.php/SDK%E4%B8%8B%E8%BD%BD#Android_SDK
+- Download `Android_SDK` from https://github.com/Logan676/Sina_Android_SDK_V1.5
+- Download `com_weibo_android_sdk` from https://github.com/Logan676/Tencent_Android_SDK_v1.2.1
 
 - Add `Android_SDK` and `com_weibo_android_sdk` as library. If you don`t know how to add, you can read the [tutorial](http://blog.sina.com.cn/s/blog_783ede0301016ip2.html).
 
