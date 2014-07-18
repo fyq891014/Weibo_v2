@@ -33,7 +33,7 @@ Read the [article](http://logan676.diandian.com/post/2013-01-31/40049163912) to 
 1. [Sina Weibo Q&A system](http://open.weibo.com/qa/index.php?qa=18155&qa_1=android%E5%BC%80%E5%8F%91%E6%96%B0%E6%B5%AA%E5%BE%AE%E5%8D%9A%E5%AE%A2%E6%88%B7%E7%AB%AF)
 2. [Weibo developing tutorial](http://blog.csdn.net/logan676/article/category/1206916)
 
-## WeiboOAuth2
+## Weibo OAuth2
 
 WeioOAuth2 provides a wrapper for interacting with sina weibo's v2 api and tencent weibo`s api. [Sina V2 API](http://open.weibo.com/wiki/API%E6%96%87%E6%A1%A3_V2), which is currently the latest version. If you are not familiar with oauth2, I recommend that you read this [article](http://open.weibo.com/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6%E8%AF%B4%E6%98%8E).
 
