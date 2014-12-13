@@ -15,8 +15,6 @@
  */
 package greendroid.widget;
 
-import java.util.List;
-
 import android.content.Context;
 import android.graphics.Rect;
 import android.view.KeyEvent;
@@ -25,20 +23,17 @@ import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.logan.R;
+
+import java.util.List;
 
 /**
  * A {@link QuickActionGrid} is an implementation of a {@link QuickActionWidget}
  * that displays {@link QuickAction}s in a grid manner. This is usually used to create
  * a shortcut to jump between different type of information on screen.
- * 
+ *
  * @author Benjamin Fellous
  * @author Cyril Mottier
  */
@@ -50,7 +45,7 @@ public class QuickActionGrid extends QuickActionWidget {
         super(context);
 
         setContentView(R.layout.gd_quick_action_grid);
-        
+
         setWidth(LayoutParams.MATCH_PARENT);
         setHeight(LayoutParams.WRAP_CONTENT);
 
@@ -63,8 +58,8 @@ public class QuickActionGrid extends QuickActionWidget {
 
         mGridView.setAdapter(new BaseAdapter() {
 
-			@Override
-			public View getView(int position, View view, ViewGroup parent) {
+            @Override
+            public View getView(int position, View view, ViewGroup parent) {
 
                 TextView textView = (TextView) view;
 
@@ -81,18 +76,18 @@ public class QuickActionGrid extends QuickActionWidget {
 
             }
 
-			@Override
-			public long getItemId(int position) {
+            @Override
+            public long getItemId(int position) {
                 return position;
             }
 
-			@Override
-			public Object getItem(int position) {
+            @Override
+            public Object getItem(int position) {
                 return null;
             }
 
-			@Override
-			public int getCount() {
+            @Override
+            public int getCount() {
                 return quickActions.size();
             }
         });
@@ -121,29 +116,29 @@ public class QuickActionGrid extends QuickActionWidget {
     }
 
     private OnItemClickListener mInternalItemClickListener = new OnItemClickListener() {
-		@Override
-		public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
             getOnQuickActionClickListener().onQuickActionClicked(QuickActionGrid.this, position);
             if (getDismissOnClick()) {
                 dismiss();
             }
         }
     };
-    
-    private LinearLayout.OnKeyListener mKeyListener = new LinearLayout.OnKeyListener(){
-		@Override
-		public boolean onKey(View v, int keyCode, KeyEvent event) {
-			if((keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_MENU) && event.getRepeatCount() == 0 && isShowing()) {
-				if(isMenuClick()) {
-					setMenuClick(false);
-				}else{
-					dismiss();
-				}
-			}else if(keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0 && !isShowing()) {
-				show();
-			}
-			return true;
-		}    	
+
+    private LinearLayout.OnKeyListener mKeyListener = new LinearLayout.OnKeyListener() {
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            if ((keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_MENU) && event.getRepeatCount() == 0 && isShowing()) {
+                if (isMenuClick()) {
+                    setMenuClick(false);
+                } else {
+                    dismiss();
+                }
+            } else if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0 && !isShowing()) {
+                show();
+            }
+            return true;
+        }
     };
 
 }

@@ -26,29 +26,22 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.logan.util;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.zip.GZIPInputStream;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
+import android.util.Log;
+import com.weibo.net.WeiboException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import android.util.Log;
-
-import com.weibo.net.WeiboException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.zip.GZIPInputStream;
 
 
 /**
@@ -82,13 +75,14 @@ public class Response {
     private HttpURLConnection con;
     private boolean streamConsumed = false;
 
-    public Response()  {
-    	
+    public Response() {
+
     }
+
     public Response(HttpURLConnection con) throws IOException {
         this.con = con;
         this.statusCode = con.getResponseCode();
-        if(null == (is = con.getErrorStream())){
+        if (null == (is = con.getErrorStream())) {
             is = con.getInputStream();
         }
         if (null != is && "gzip".equals(con.getContentEncoding())) {
@@ -107,24 +101,25 @@ public class Response {
     }
 
     public String getResponseHeader(String name) {
-    	if (con != null)
-    		return con.getHeaderField(name);
-    	else
-    		return null;
+        if (con != null)
+            return con.getHeaderField(name);
+        else
+            return null;
     }
 
     /**
      * Returns the response stream.<br>
      * This method cannot be called after calling asString() or asDcoument()<br>
      * It is suggested to call disconnect() after consuming the stream.
-     *
+     * <p/>
      * Disconnects the internal HttpURLConnection silently.
+     *
      * @return response body stream
      * @throws WeiboException
      * @see #disconnect()
      */
     public InputStream asStream() {
-        if(streamConsumed){
+        if (streamConsumed) {
             throw new IllegalStateException("Stream has already been consumed.");
         }
         return is;
@@ -133,11 +128,12 @@ public class Response {
     /**
      * Returns the response body as string.<br>
      * Disconnects the internal HttpURLConnection silently.
+     *
      * @return response body
      * @throws WeiboException
      */
-    public String asString() throws WeiboException{
-        if(null == responseAsString){
+    public String asString() throws WeiboException {
+        if (null == responseAsString) {
             BufferedReader br;
             try {
                 InputStream stream = asStream();
@@ -171,6 +167,7 @@ public class Response {
     /**
      * Returns the response body as org.w3c.dom.Document.<br>
      * Disconnects the internal HttpURLConnection silently.
+     *
      * @return response body as org.w3c.dom.Document
      * @throws WeiboException
      */
@@ -192,6 +189,7 @@ public class Response {
     /**
      * Returns the response body as sinat4j.org.json.JSONObject.<br>
      * Disconnects the internal HttpURLConnection silently.
+     *
      * @return response body as sinat4j.org.json.JSONObject
      * @throws WeiboException
      */
@@ -206,12 +204,13 @@ public class Response {
     /**
      * Returns the response body as sinat4j.org.json.JSONArray.<br>
      * Disconnects the internal HttpURLConnection silently.
+     *
      * @return response body as sinat4j.org.json.JSONArray
      * @throws WeiboException
      */
     public JSONArray asJSONArray() throws WeiboException {
         try {
-        	return  new JSONArray(asString());  
+            return new JSONArray(asString());
         } catch (Exception jsone) {
             throw new WeiboException(jsone.getMessage() + ":" + this.responseAsString, jsone);
         }
@@ -225,7 +224,7 @@ public class Response {
         }
     }
 
-    public void disconnect(){
+    public void disconnect() {
         con.disconnect();
     }
 
@@ -233,10 +232,10 @@ public class Response {
 
     /**
      * Unescape UTF-8 escaped characters to string.
-     * @author pengjianq...@gmail.com
      *
      * @param original The string to be unescaped.
      * @return The unescaped string
+     * @author pengjianq...@gmail.com
      */
     public static String unescape(String original) {
         Matcher mm = escaped.matcher(original);
@@ -251,7 +250,7 @@ public class Response {
 
     @Override
     public String toString() {
-        if(null != responseAsString){
+        if (null != responseAsString) {
             return responseAsString;
         }
         return "Response{" +
@@ -262,29 +261,29 @@ public class Response {
                 ", con=" + con +
                 '}';
     }
-    
+
     private void log(String message) {
 //        if (DEBUG) {
-        	Log.v("Response_DEBUG","[" + new java.util.Date() + "]" + message);
+        Log.v("Response_DEBUG", "[" + new java.util.Date() + "]" + message);
 //        }
     }
 
     private void log(String message, String message2) {
 //        if (DEBUG) {
-            log(message + message2);
+        log(message + message2);
 //        }
     }
 
-	public String getResponseAsString() {
-		return responseAsString;
-	}
+    public String getResponseAsString() {
+        return responseAsString;
+    }
 
-	public void setResponseAsString(String responseAsString) {
-		this.responseAsString = responseAsString;
-	}
+    public void setResponseAsString(String responseAsString) {
+        this.responseAsString = responseAsString;
+    }
 
-	public void setStatusCode(int statusCode) {
-		this.statusCode = statusCode;
-	}
-    
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
+    }
+
 }

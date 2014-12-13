@@ -1,6 +1,6 @@
-/**   
+/**
  * Copyright (c) 2013 by Logan.	
- *   
+ *
  * 爱分享-微博客户端，是一款运行在android手机上的开源应用，代码和文档已托管在GitHub上，欢迎爱好者加入
  * 1.授权认证：Oauth2.0认证流程
  * 2.服务器访问操作流程
@@ -12,11 +12,9 @@
  * 8.Android UI：样式文件，布局
  * 9.异步加载图片，异步处理数据，多线程  
  * 10.第三方开源框架和插件
- *    
+ *
  */
 package com.logan.util;
-
-import java.io.File;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -30,24 +28,27 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.view.Window;
 
+import java.io.File;
+
 /**
  * Android各版本的兼容方法
+ *
  * @author liux (http://my.oschina.net/liux)
  * @version 1.0
  * @created 2012-8-6
  */
 public class MethodsCompat {
-	
+
     @TargetApi(5)
     public static void overridePendingTransition(Activity activity, int enter_anim, int exit_anim) {
-       	activity.overridePendingTransition(enter_anim, exit_anim);
+        activity.overridePendingTransition(enter_anim, exit_anim);
     }
 
     @TargetApi(7)
     public static Bitmap getThumbnail(ContentResolver cr, long origId, int kind, Options options) {
-       	return MediaStore.Images.Thumbnails.getThumbnail(cr,origId,kind, options);
+        return MediaStore.Images.Thumbnails.getThumbnail(cr, origId, kind, options);
     }
-    
+
     @TargetApi(8)
     public static File getExternalCacheDir(Context context) {
 
@@ -82,5 +83,5 @@ public class MethodsCompat {
             window.setUiOptions(uiOptions);
         }
     }
-        
+
 }

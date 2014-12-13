@@ -15,9 +15,6 @@
  */
 package greendroid.widget;
 
-import java.lang.ref.WeakReference;
-import java.util.List;
-
 import android.content.Context;
 import android.graphics.Rect;
 import android.view.LayoutInflater;
@@ -31,8 +28,10 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
-
 import com.logan.R;
+
+import java.lang.ref.WeakReference;
+import java.util.List;
 
 /**
  * A QuickActionBar displays a set of {@link QuickAction} on a single row. In
@@ -40,7 +39,7 @@ import com.logan.R;
  * horizontally scroll {@link QuickAction}s. Using a QuickActionBar is a great
  * replacement for the long click UI pattern. For instance,
  * {@link QuickActionBar} adds secondary actions to an item of a ListView.
- * 
+ *
  * @author Benjamin Fellous
  * @author Cyril Mottier
  */
@@ -60,8 +59,8 @@ public class QuickActionBar extends QuickActionWidget {
 
         mRackAnimation.setInterpolator(new Interpolator() {
 
-			@Override
-			public float getInterpolation(float t) {
+            @Override
+            public float getInterpolation(float t) {
                 final float inner = (t * 1.55f) - 1.1f;
                 return 1.2f - inner * inner;
             }
@@ -126,9 +125,9 @@ public class QuickActionBar extends QuickActionWidget {
 
     private OnClickListener mClickHandlerInternal = new OnClickListener() {
 
-        
-		@Override
-		public void onClick(View view) {
+
+        @Override
+        public void onClick(View view) {
 
             final OnQuickActionClickListener listener = getOnQuickActionClickListener();
 

@@ -28,12 +28,12 @@ package com.logan.util;
 
 import java.util.HashMap;
 import java.util.Map;
+
 /**
  * HTML文本格式处理类
+ *
  * @author Logan <a href="https://github.com/Logan676/JustSharePro"/>
- *   
- * @version 1.0 
- *  
+ * @version 1.0
  */
 public class HTMLEntity {
     public static String escape(String original) {

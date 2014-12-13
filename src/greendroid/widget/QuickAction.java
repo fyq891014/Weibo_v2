@@ -15,16 +15,16 @@
  */
 package greendroid.widget;
 
-import java.lang.ref.WeakReference;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
+import java.lang.ref.WeakReference;
+
 /**
  * A QuickAction implements an item in a {@link QuickActionWidget}. A
  * QuickAction represents a single action and may contain a text and an icon.
- * 
+ *
  * @author Benjamin Fellous
  * @author Cyril Mottier
  */
@@ -33,7 +33,7 @@ public class QuickAction {
     public Drawable mDrawable;
     public CharSequence mTitle;
 
-    /* package */WeakReference<View> mView;
+    /* package */ WeakReference<View> mView;
 
     public QuickAction(Drawable d, CharSequence title) {
         mDrawable = d;
@@ -55,19 +55,19 @@ public class QuickAction {
         mTitle = ctx.getResources().getString(titleId);
     }
 
-	public Drawable getIcon() {
-		return mDrawable;
-	}
+    public Drawable getIcon() {
+        return mDrawable;
+    }
 
-	public void setIcon(Drawable mDrawable) {
-		this.mDrawable = mDrawable;
-	}
+    public void setIcon(Drawable mDrawable) {
+        this.mDrawable = mDrawable;
+    }
 
-	public CharSequence getTitle() {
-		return mTitle;
-	}
+    public CharSequence getTitle() {
+        return mTitle;
+    }
 
-	public void setTitle(CharSequence mTitle) {
-		this.mTitle = mTitle;
-	}    
+    public void setTitle(CharSequence mTitle) {
+        this.mTitle = mTitle;
+    }
 }
