@@ -16,17 +16,12 @@
  */
 package com.logan.app;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo.State;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.Window;
-import android.view.WindowManager;
 import com.logan.R;
 import com.logan.util.Utils;
 import com.logan.weibo.bean.BaseActivity;
@@ -39,17 +34,14 @@ import java.io.IOException;
 /**
  * 欢迎界面
  *
- * @author Logan <a href="https://github.com/Logan676/JustSharePro"/>
- * @version 1.0
+ * @author Logan
+ * @version 1.1
  */
-@SuppressLint("HandlerLeak")
 public class WelcomeActivity extends BaseActivity {
+
     public static final int SETTING_WIFI = 0;
-    long startTime = System.currentTimeMillis();
-    long endTime;
     private Boolean isDBAvaliable = false;
 
-    @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -107,36 +99,48 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(getLayout());
-        if (mDBManager.getAccounts().size() != 0) isDBAvaliable = true;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                endTime = startTime;
-                while (endTime - startTime < 2000) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    endTime = System.currentTimeMillis();
-                }
-                handler.sendEmptyMessage(0);
-            }
-        }).start();
+        checkDBAvailabe();
+        showSplashAnimations();
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == SETTING_WIFI) {
-//            if (resultCode == UPDATE_ADAPTER_OK) {  
-//                //do something  
-//            }  
+    private void checkDBAvailabe() {
+        if (mDBManager.getAccounts().size() != 0)
+            isDBAvaliable = true;
+    }
+
+    private void showSplashAnimations() {
+        SplashAnimationTask task = new SplashAnimationTask(handler);
+        Thread thread = new Thread(task);
+        thread.start();
+    }
+
+    private class SplashAnimationTask implements Runnable {
+        Handler handler;
+        long startTime = System.currentTimeMillis();
+        long endTime;
+
+        public SplashAnimationTask(Handler handler) {
+            this.handler = handler;
         }
-        super.onActivityResult(requestCode, resultCode, data);
+
+        @Override
+        public void run() {
+            endTime = startTime;
+            while (endTime - startTime < 2000) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    //TODO notify ui
+                    e.printStackTrace();
+                }
+                endTime = System.currentTimeMillis();
+            }
+            handler.sendEmptyMessage(0);
+        }
     }
 
     @Override
