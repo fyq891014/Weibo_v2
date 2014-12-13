@@ -58,10 +58,13 @@ public class AppContext extends Application {
     //private int loginUid = 0;	//登录用户的id
     //private Hashtable<String, Object> memCacheRegion = new Hashtable<String, Object>();
 
+    public static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        AppContext.context = getApplicationContext();
+
         if (false) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                     .detectAll().penaltyLog().build());
@@ -70,6 +73,11 @@ public class AppContext extends Application {
         }
 
         initImageLoader(getApplicationContext());
+    }
+
+    public static Context getAppContext() {
+
+        return AppContext.context;
     }
 
     public static void initImageLoader(Context context) {

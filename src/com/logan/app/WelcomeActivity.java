@@ -28,6 +28,7 @@ import android.os.Message;
 import android.view.Window;
 import android.view.WindowManager;
 import com.logan.R;
+import com.logan.util.Utils;
 import com.logan.weibo.bean.BaseActivity;
 import com.logan.weibo.ui.AccountActivity;
 import com.logan.weibo.ui.QAuthorizeActivity;
@@ -54,14 +55,10 @@ public class WelcomeActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-                    // NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
-                    // boolean available = networkInfo.isAvailable();
-                    State state = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();//TYPE_WIFI
-                    if (state != State.CONNECTED) {//state != State.CONNECTED
+                    if (!Utils.isNetworkOn()) {
                         new AlertDialog.Builder(WelcomeActivity.this)
                                 .setTitle("无连接")
-                                .setMessage("请使用WIFI连接")
+                                .setMessage("请连接网络")
                                 .setPositiveButton("设置",
                                         new DialogInterface.OnClickListener() {
 
